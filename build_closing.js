@@ -41,6 +41,7 @@ const speakerNotes = [
   "Before starting, test all mics. Judges should be in the front row, sponsors in the second row. Be fully ready to begin at 4:00 PM.",
   "Welcome everyone back and let the room settle. Keep the tone warm, brief, and confident.",
   "Pause long enough for attendees to grab the Closing Ceremony stamp before moving on.",
+  "Read the land acknowledgement clearly before moving into judge introductions.",
   "Introduce Joanne plus the two remaining judges from the non-hacker check-in sheet. Confirm names, titles, and pronunciation before ceremony.",
   "Explain the format cleanly: each finalist gets 5 minutes for the panel presentation, then a short transition into 2 minutes of Q&A.",
   "Build energy for the finalist block and remind the room to support all three teams.",
@@ -53,16 +54,29 @@ const speakerNotes = [
   "Announce the Govee TV Backlight Strip winners live.",
   "Announce the JBL Go Speaker winners live.",
   "Announce the Barry's 5-class pack winner live.",
-  "Announce the Spin Society winner live and note that this prize is digital through their @cmdf email.",
-  "Announce the Koerner's Pub giftcard winners live and note that this prize is digital through their @cmdf email.",
-  "Announce the Progression Bouldering pass winners live and note that this is digital through their @cmdf email after the feedback-form check.",
+  "Announce the Spin Society winner live and note that this prize is digital Through cmd-f email.",
+  "Announce the Koerner's Pub giftcard winners live and note that this prize is digital Through cmd-f email.",
+  "Announce the Progression Bouldering pass winners live and note that this is digital Through cmd-f email after the feedback-form check.",
   "Keep momentum high. This is the pivot from raffle into the side-award section while judging continues.",
   "Set up the Best Design award and fill in any final details from the 3:50 PM update.",
   "Announce Best Design and keep the winners seated for later photos.",
   "List all 8 UBC CS Project Hub shortlisted teams. Make clear they will be contacted after the fact.",
   "Set up the nwChoice award and confirm the correct project and presenter.",
   "Announce the nwChoice winner and keep them seated.",
-  "Now pivot from side awards into sponsor awards.",
+  "Set up the MLH prize block and make clear these categories are separate from the sponsor awards that follow, especially ElevenLabs.",
+  "Introduce [MLH] Best Hack Built with Google Antigravity and summarize the prize before the reveal.",
+  "Announce the Google Antigravity winner and keep them seated.",
+  "Introduce [MLH] Best Use of Gemini API.",
+  "Announce the Gemini API winner and keep them seated.",
+  "Introduce [MLH] Best Use of ElevenLabs and note that it is not the same as the ElevenLabs sponsor prize later.",
+  "Announce the MLH ElevenLabs winner and keep them seated.",
+  "Introduce [MLH] Best Use of Solana.",
+  "Announce the Solana winner and keep them seated.",
+  "Introduce [MLH] Best Use of MongoDB Atlas.",
+  "Announce the MongoDB Atlas winner and keep them seated.",
+  "Introduce [MLH] Best .Tech Domain Name.",
+  "Announce the .Tech Domain winner and keep them seated.",
+  "Now pivot from MLH awards into sponsor awards.",
   "Invite the 1Password representative if needed, then announce the category.",
   "Announce the 1Password winner. Ask them to stay seated; prizes and photos happen at the end.",
   "Invite the ElevenLabs representative if needed.",
@@ -82,9 +96,18 @@ const speakerNotes = [
   "Close warmly and send people into pickup, photos, and goodbyes.",
 ];
 
-function bgForSlide(id) {
+function legacyBgForSlide(id) {
   if (id === 1) return 'closing';
-  return ['bg2', 'bg3', 'bg1'][(id - 2) % 3];
+  if (id >= 2 && id <= 24) return ['bg2', 'bg3', 'bg1'][(id - 2) % 3];
+  if (id === 25) return 'bg1';
+  if (id === 26) return 'bg2';
+  return ['bg2', 'bg3', 'bg1'][(id - 4) % 3];
+}
+
+function bgForSlide(id) {
+  if (id === 4) return 'bg1';
+  if (id >= 5) return legacyBgForSlide(id - 1);
+  return legacyBgForSlide(id);
 }
 
 function floaties(items = []) {
@@ -158,6 +181,20 @@ function sponsorPrizeCard({ badgeText, badgeClass, prizeTitle, prizeLines }) {
         </div>
         <div class="prize-strip revealable">And the winner is...</div>
       `, 'glass-card--content single-card closing-prize-card')}
+    </div>
+  `;
+}
+
+function prizeTrackSlide({ title, kicker, items, note = '' }) {
+  return `
+    <div class="single-shell single-shell--wide">
+      ${card(`
+        ${sectionIntro(title, kicker, 'center')}
+        <div class="feature-stack">
+          ${items.map((item) => `<div class="feature-panel revealable"><strong>${item.title}</strong><span>${item.description}</span></div>`).join('')}
+        </div>
+        ${note ? `<div class="footer-pill-row footer-pill-row--center">${pill(note, 'pill--lavender pill--wide')}</div>` : ''}
+      `, 'glass-card--content single-card')}
     </div>
   `;
 }
@@ -819,10 +856,38 @@ const slides = [
               <p class="body-copy body-copy--center">Scan it now before we move into judge introductions and finalist demos.</p>
               <p class="body-copy body-copy--center">More stamps still means better raffle odds later in the ceremony. ✨</p>
             </div>
-            <div class="stamp-qr-placeholder revealable" aria-label="Closing ceremony stamp QR code placeholder">
-              <div class="stamp-qr-placeholder__box">QR</div>
-              <div class="stamp-qr-placeholder__label">Closing Stamp QR Placeholder</div>
-              <div class="stamp-qr-placeholder__hint">Replace with the live QR image before ceremony.</div>
+            <div class="stamp-qr-placeholder revealable">
+              <img
+                class="stamp-qr-image"
+                src="${assetReference('images', 'closingstamp.png')}"
+                alt="Closing ceremony stamp QR code"
+              >
+            </div>
+          </div>
+        `, 'glass-card--content callout-card')}
+      </div>
+    `,
+  },
+  {
+    id: 4,
+    title: 'Land Acknowledgement',
+    layout: 'callout',
+    extras: [],
+    content: `
+      <div class="callout-layout">
+        ${card(`
+          ${pill('Acknowledgement', 'pill--gradient-gold')}
+          <h2 class="callout-title">Land Acknowledgement.</h2>
+          <div class="stamp-slide-grid">
+            <div class="stamp-slide-copy">
+              <p class="body-copy body-copy--center">We want to acknowledge that cmd-f, and all nwPlus programming takes place on the ancestral and unceded territory of the xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh (Squamish), and səlilwətaɬ (Tsleil-Waututh) peoples.</p>
+            </div>
+            <div class="stamp-qr-placeholder revealable">
+              <img
+                class="stamp-qr-image"
+                src="${assetReference('images', 'closingstamp.png')}"
+                alt="Land acknowledgement QR code"
+              >
             </div>
           </div>
         `, 'glass-card--content callout-card')}
@@ -839,22 +904,28 @@ const slides = [
         ${sectionIntro('Meet the Closing Judges 👩‍⚖️', "Tonight's Panel")}
         <div class="panel-grid">
           <div class="panel-card revealable">
-            <div class="panel-photo">J</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="${assetReference('images', 'joanne.jpeg')}" alt="Joanne">
+            </div>
             <div class="panel-name">Joanne</div>
-            <div class="panel-role">Closing Ceremony Judge</div>
-            <div class="panel-fact">Add Joanne's title, company, and preferred intro here.</div>
+            <div class="panel-role">she/her</div>
+            <div class="panel-fact">SWE @ Apple</div>
           </div>
           <div class="panel-card revealable">
-            <div class="panel-photo">2</div>
-            <div class="panel-name">[ Judge Name ]</div>
-            <div class="panel-role">From Non-Hacker Check-In Sheet</div>
-            <div class="panel-fact">Add title, company, and one short note before ceremony.</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="${assetReference('images', 'amyjo.jpeg')}" alt="Amy Jo">
+            </div>
+            <div class="panel-name">Amy Jo</div>
+            <div class="panel-role">she/her</div>
+            <div class="panel-fact">SWE @ Wealthsimple</div>
           </div>
           <div class="panel-card revealable">
-            <div class="panel-photo">3</div>
-            <div class="panel-name">[ Judge Name ]</div>
-            <div class="panel-role">From Non-Hacker Check-In Sheet</div>
-            <div class="panel-fact">Add title, company, and one short note before ceremony.</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="${assetReference('images', 'anemmeabasi.jpeg')}" alt="Anemmeabasi">
+            </div>
+            <div class="panel-name">Anemmeabasi</div>
+            <div class="panel-role">she/her</div>
+            <div class="panel-fact">SWE @ Microsoft</div>
           </div>
         </div>
       </div>
@@ -947,7 +1018,7 @@ const slides = [
           ${pill('Raffle During Deliberation', 'pill--gradient-gold')}
           <h2 class="callout-title">Raffle and Prize Pickup.</h2>
           <p class="body-copy body-copy--center">We are running the raffle now while judges deliberate on the main placements.</p>
-          <p class="body-copy body-copy--center">All prize winners should stay seated during announcements.</p>
+          <p class="body-copy body-copy--center">All prize winners, please stay seated during announcements.</p>
           <p class="body-copy body-copy--center">Prize pickup and photos happen after the ceremony.</p>
         `, 'glass-card--content callout-card')}
       </div>
@@ -958,49 +1029,49 @@ const slides = [
     title: '2 Xbox Controllers',
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide('2 Xbox Controllers', 'Winners Announced Live.'),
+    content: rafflePrizeSlide('2 Xbox Controllers', ''),
   },
   {
     id: 13,
     title: '2 Govee TV Backlight Strips',
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide('2 Govee TV Backlight Strips', 'Winners Announced Live.'),
+    content: rafflePrizeSlide('2 Govee TV Backlight Strips', ''),
   },
   {
     id: 14,
     title: '2 JBL Go Speakers',
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide('2 JBL Go Speakers', 'Winners Announced Live.'),
+    content: rafflePrizeSlide('2 JBL Go Speakers', ''),
   },
   {
     id: 15,
     title: "1 Barry's 5-Class Pack",
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide("1 Barry's 5-Class Pack", 'Winner Announced Live.'),
+    content: rafflePrizeSlide("1 Barry's 5-Class Pack", ''),
   },
   {
     id: 16,
     title: '1 Spin Society Online Prize',
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide('1 Spin Society Online Prize', 'Digital Prize. Winner Will Be Notified Through Their @cmdf Email.'),
+    content: rafflePrizeSlide('1 Spin Society Online Prize', 'Digital Prize. Winner Will Be Notified Through cmd-f Email.'),
   },
   {
     id: 17,
     title: "2 Koerner's Pub Giftcards",
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide("2 Koerner's Pub Giftcards", 'Digital Prize. Winners Will Be Notified Through Their @cmdf Email.'),
+    content: rafflePrizeSlide("2 Koerner's Pub Giftcards", 'Digital Prize. Winners Will Be Notified Through cmd-f Email.'),
   },
   {
     id: 18,
     title: '4 Progression Bouldering Passes',
     layout: 'winner-reveal',
     extras: [],
-    content: rafflePrizeSlide('4 Progression Bouldering Passes', 'Digital Prize. Winners Will Be Notified Through Their @cmdf Email After the Feedback Form Check.'),
+    content: rafflePrizeSlide('4 Progression Bouldering Passes', 'Digital Prize. Winners Will Be Notified Through cmd-f Email.'),
   },
   {
     id: 19,
@@ -1101,6 +1172,192 @@ const slides = [
   },
   {
     id: 25,
+    title: 'MLH Awards Intro',
+    layout: 'callout',
+    extras: [],
+    content: `
+      <div class="callout-layout">
+        <div class="callout-emoji revealable">🧠</div>
+        ${card(`
+          ${pill('MLH Awards During Deliberation', 'pill--gradient-dusk')}
+          <h2 class="callout-title">MLH Awards Are Up Next.</h2>
+          <p class="body-copy body-copy--center">While the judges finish deliberating, we are recognizing standout hacks across the official MLH prize tracks.</p>
+          <p class="body-copy body-copy--center">The MLH ElevenLabs award is separate from the ElevenLabs sponsor prize later in the ceremony.</p>
+        `, 'glass-card--content callout-card')}
+      </div>
+    `,
+  },
+  {
+    id: 26,
+    title: 'Google Antigravity Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '🤖 MLH Prize',
+      badgeClass: 'pill--gradient-rabbit',
+      prizeTitle: '[MLH] Best Hack Built with Google Antigravity',
+      prizeLines: [
+        'Google Swag Kits',
+        "Build with Google Antigravity's agent-first editor and student access to Google AI Pro.",
+      ],
+    }),
+  },
+  {
+    id: 27,
+    title: 'Google Antigravity Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: 'Google Antigravity Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 28,
+    title: 'Gemini API Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '✨ MLH Prize',
+      badgeClass: 'pill--gradient-bloom',
+      prizeTitle: '[MLH] Best Use of Gemini API',
+      prizeLines: [
+        'Google Swag Kits',
+        'Build with Gemini for chat, summarization, creative generation, code, and more.',
+      ],
+    }),
+  },
+  {
+    id: 29,
+    title: 'Gemini API Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: 'Gemini API Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 30,
+    title: 'MLH ElevenLabs Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '🎙️ MLH Prize',
+      badgeClass: 'pill--gradient-dusk',
+      prizeTitle: '[MLH] Best Use of ElevenLabs',
+      prizeLines: [
+        'Wireless Earbuds',
+        'Build natural, expressive voice experiences with ElevenLabs.',
+        'Separate from the ElevenLabs sponsor prize.',
+      ],
+    }),
+  },
+  {
+    id: 31,
+    title: 'MLH ElevenLabs Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: 'MLH ElevenLabs Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 32,
+    title: 'Solana Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '⚡ MLH Prize',
+      badgeClass: 'pill--gradient-gold',
+      prizeTitle: '[MLH] Best Use of Solana',
+      prizeLines: [
+        'Ledger Nano S Plus',
+        'Build fast, scalable apps with near-zero transaction costs on Solana.',
+      ],
+    }),
+  },
+  {
+    id: 33,
+    title: 'Solana Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: 'Solana Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 34,
+    title: 'MongoDB Atlas Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '🗄️ MLH Prize',
+      badgeClass: 'pill--mint',
+      prizeTitle: '[MLH] Best Use of MongoDB Atlas',
+      prizeLines: [
+        'M5Stack IoT Kit',
+        'Use MongoDB Atlas to power your cloud data layer and manage your hack data.',
+      ],
+    }),
+  },
+  {
+    id: 35,
+    title: 'MongoDB Atlas Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: 'MongoDB Atlas Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 36,
+    title: '.Tech Domain Award',
+    layout: 'split-right',
+    extras: [],
+    content: sponsorPrizeCard({
+      badgeText: '🌐 MLH Prize',
+      badgeClass: 'pill--coral',
+      prizeTitle: '[MLH] Best .Tech Domain Name',
+      prizeLines: [
+        'Desktop Microphone + Free .Tech Domain',
+        'Win a free .Tech domain name for up to 10 years to keep building after demo day.',
+      ],
+    }),
+  },
+  {
+    id: 37,
+    title: '.Tech Domain Winner',
+    layout: 'winner-reveal',
+    extras: [],
+    content: winnerReveal({
+      title: '.Tech Domain Winner',
+      team: '[ Project Name ]',
+      body: 'Please stay seated. Prize pickup and photos happen at the end.',
+      confetti: true,
+      eyebrow: 'MLH Prize',
+    }),
+  },
+  {
+    id: 38,
     title: 'Sponsor Prize Transition',
     layout: 'callout',
     extras: [],
@@ -1117,7 +1374,7 @@ const slides = [
     `,
   },
   {
-    id: 26,
+    id: 39,
     title: '1Password Prize',
     layout: 'split-right',
     extras: [],
@@ -1134,7 +1391,7 @@ const slides = [
     }),
   },
   {
-    id: 27,
+    id: 40,
     title: '1Password Winner',
     layout: 'winner-reveal',
     extras: [],
@@ -1147,7 +1404,7 @@ const slides = [
     }),
   },
   {
-    id: 28,
+    id: 41,
     title: 'ElevenLabs Prize',
     layout: 'split-right',
     extras: [],
@@ -1162,7 +1419,7 @@ const slides = [
     }),
   },
   {
-    id: 29,
+    id: 42,
     title: 'ElevenLabs Winner',
     layout: 'winner-reveal',
     extras: [],
@@ -1175,7 +1432,7 @@ const slides = [
     }),
   },
   {
-    id: 30,
+    id: 43,
     title: 'Lovable Prize',
     layout: 'split-right',
     extras: [],
@@ -1190,7 +1447,7 @@ const slides = [
     }),
   },
   {
-    id: 31,
+    id: 44,
     title: 'Lovable Winner',
     layout: 'winner-reveal',
     extras: [],
@@ -1203,7 +1460,7 @@ const slides = [
     }),
   },
   {
-    id: 32,
+    id: 45,
     title: 'PCCA Prize',
     layout: 'split-right',
     extras: [],
@@ -1217,7 +1474,7 @@ const slides = [
     }),
   },
   {
-    id: 33,
+    id: 46,
     title: 'PCCA Winner',
     layout: 'winner-reveal',
     extras: [],
@@ -1230,7 +1487,7 @@ const slides = [
     }),
   },
   {
-    id: 34,
+    id: 47,
     title: 'Top Three',
     layout: 'winner-reveal',
     extras: [],
@@ -1243,7 +1500,7 @@ const slides = [
     `,
   },
   {
-    id: 35,
+    id: 48,
     title: 'Third Place',
     layout: 'winner-reveal',
     extras: [],
@@ -1256,7 +1513,7 @@ const slides = [
     }),
   },
   {
-    id: 36,
+    id: 49,
     title: 'Second Place',
     layout: 'winner-reveal',
     extras: [],
@@ -1269,7 +1526,7 @@ const slides = [
     }),
   },
   {
-    id: 37,
+    id: 50,
     title: 'First Place',
     layout: 'winner-reveal',
     extras: [],
@@ -1285,7 +1542,7 @@ const slides = [
     `,
   },
   {
-    id: 38,
+    id: 51,
     title: 'Quick Prize Reminder',
     layout: 'split-left',
     extras: [{ emoji: '📸', x: '12%', y: '18%', size: '48px' }],
@@ -1296,24 +1553,23 @@ const slides = [
             ${sectionIntro('Quick Prize Reminder', 'Before We Wrap')}
             <div class="feature-stack">
               <div class="feature-row revealable"><span class="feature-icon">🏆</span><span>Raffle winners, side-award winners, sponsor-award winners, and the Top 3 should stay after the ceremony.</span></div>
-              <div class="feature-row revealable"><span class="feature-icon">📸</span><span>Prize pickup and official photos happen at the end, not during the announcements.</span></div>
-              <div class="feature-row revealable"><span class="feature-icon">🎤</span><span>Please stay in place until an organizer calls your section forward.</span></div>
+              <div class="feature-row revealable"><span class="feature-icon">📸</span><span>Photos will also happen at the end!</span></div>
             </div>
           `, 'glass-card--content split-card')}
         </div>
-        <div class="split-column split-column--narrow">
+        <!-- <div class="split-column split-column--narrow">
           ${card(`
             <div class="card-badge">Stage Flow</div>
             <p class="card-copy">Keep aisles clear.</p>
             <p class="card-copy">Sponsors remain seated until called.</p>
             <p class="card-copy">Organizers will manage photo order.</p>
           `, 'glass-card--accent split-card feedback-card', 'mint')}
-        </div>
+        </div> -->
       </div>
     `,
   },
   {
-    id: 39,
+    id: 52,
     title: 'Thank You',
     layout: 'three-col',
     extras: [],
@@ -1341,7 +1597,7 @@ const slides = [
     `,
   },
   {
-    id: 40,
+    id: 53,
     title: 'Sponsor Shoutout',
     layout: 'callout',
     extras: [],
@@ -1358,14 +1614,14 @@ const slides = [
     `,
   },
   {
-    id: 41,
+    id: 54,
     title: 'Sponsor Tiers',
     layout: 'list-card',
     extras: [],
     content: `
       <div class="single-shell single-shell--wide sponsor-tier-shell">
         ${card(`
-          ${sectionIntro('Sponsor Tiers', 'Add Logos to sponsor-logos/name.png', 'center')}
+          ${sectionIntro('Sponsor Tiers', '', 'center')}
           <div class="sponsor-tier-stack">
             ${sponsorTierRow('Silver Sponsors', 'pill--gradient-dusk', [
               { name: '1Password', file: '1password' },
@@ -1401,7 +1657,7 @@ const slides = [
     `,
   },
   {
-    id: 42,
+    id: 55,
     title: 'Goodbye',
     layout: 'callout',
     extras: [],
@@ -1428,18 +1684,16 @@ const slides = [
   },
 ];
 
-if (slides.length !== 42) {
-  throw new Error(`Expected 42 slides, found ${slides.length}`);
+if (slides.length !== 56) {
+  throw new Error(`Expected 56 slides, found ${slides.length}`);
 }
 
-if (speakerNotes.length !== 42) {
-  throw new Error(`Expected 42 speaker notes, found ${speakerNotes.length}`);
+if (speakerNotes.length !== 56) {
+  throw new Error(`Expected 56 speaker notes, found ${speakerNotes.length}`);
 }
 
 slides.forEach((slide, index) => {
-  if (slide.id !== index + 1) {
-    throw new Error(`Slide IDs must be sequential. Expected ${index + 1}, found ${slide.id}`);
-  }
+  slide.id = index + 1;
   slide.bg = bgForSlide(slide.id);
   if (!slide.bg) {
     throw new Error(`Missing background assignment for slide ${slide.id}`);
@@ -1686,11 +1940,19 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
   padding: 18px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.stamp-qr-image {
+  width: min(260px, 24vw);
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
+  border-radius: 22px;
+  background: #fff;
 }
 
 .stamp-qr-placeholder__box {
@@ -1721,6 +1983,21 @@ select {
   line-height: 1.45;
   color: rgba(26, 55, 134, 0.68);
   text-align: center;
+}
+
+.panel-photo {
+  width: clamp(150px, 16vw, 220px);
+  height: clamp(150px, 16vw, 220px);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.panel-photo__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .closing-stat-grid {
@@ -2422,7 +2699,7 @@ ${slideMarkup}
       closing: CLOSING_BG,
     };
 
-    const winnerSlides = new Set([21, 24, 27, 29, 31, 33, 35, 36, 37]);
+    const winnerSlides = new Set([22, 25, 28, 30, 32, 34, 36, 38, 41, 43, 45, 47, 49, 50, 51]);
     const slideEls = Array.from(document.querySelectorAll('.slide'));
     const dotsContainer = document.getElementById('nav-dots');
     const sectionNavButtons = document.getElementById('section-nav-buttons');

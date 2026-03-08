@@ -1607,11 +1607,19 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
   padding: 18px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.stamp-qr-image {
+  width: min(260px, 24vw);
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
+  border-radius: 22px;
+  background: #fff;
 }
 
 .stamp-qr-placeholder__box {
@@ -1642,6 +1650,21 @@ select {
   line-height: 1.45;
   color: rgba(26, 55, 134, 0.68);
   text-align: center;
+}
+
+.panel-photo {
+  width: clamp(150px, 16vw, 220px);
+  height: clamp(150px, 16vw, 220px);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.panel-photo__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .closing-stat-grid {
@@ -2410,7 +2433,7 @@ const IMG_CLOSING = "images/closing.svg";
       </div>
         <div class="slide-content">
       <div class="callout-layout closing-callout">
-        <div class="callout-emoji revealable">🥳</div>
+        <div class="callout-emoji revealable">🥺</div>
         <article class="glass-card revealable glass-card--hero callout-card">
           <span class="pill pill--gradient-dusk">Act I · Welcome Back</span>
           <h1 class="callout-title">You Made It Back.</h1>
@@ -2422,8 +2445,33 @@ const IMG_CLOSING = "images/closing.svg";
     </div>
       </section>
     
+      <section class="slide layout-callout" id="slide-3" data-bg="bg1" data-slide-id="4">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+      <div class="callout-layout">
+        <article class="glass-card revealable glass-card--content callout-card">
+          <span class="pill pill--gradient-gold">Acknowledgement</span>
+          <h2 class="callout-title">Land Acknowledgement.</h2>
+          <div class="stamp-slide-grid">
+            <div class="stamp-slide-copy">
+              <p class="body-copy body-copy--center">We want to acknowledge that cmd-f, and all nwPlus programming takes place on the ancestral and unceded territory of the xʷməθkʷəy̓əm (Musqueam), Sḵwx̱wú7mesh (Squamish), and səlilwətaɬ (Tsleil-Waututh) peoples.</p>
+            </div>
+            <div class="stamp-qr-placeholder revealable">
+              <img
+                class="stamp-qr-image"
+                src="images/closinglandacknowledgement.png"
+                alt="Land acknowledgement QR code"
+              >
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+      </section>
 
-      <section class="slide layout-callout" id="slide-3" data-bg="bg3" data-slide-id="3">
+      <section class="slide layout-callout" id="slide-4" data-bg="bg3" data-slide-id="3">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2438,9 +2486,12 @@ const IMG_CLOSING = "images/closing.svg";
               <p class="body-copy body-copy--center">Scan it now before we move into judge introductions and finalist demos.</p>
               <p class="body-copy body-copy--center">More stamps still means better raffle odds later in the ceremony. ✨</p>
             </div>
-            <div class="stamp-qr-placeholder revealable" aria-label="Closing ceremony stamp QR code placeholder">
-              <div class="stamp-qr-placeholder__box">QR</div>
-              <div class="stamp-qr-placeholder__label">Closing Stamp QR Placeholder</div>
+            <div class="stamp-qr-placeholder revealable">
+              <img
+                class="stamp-qr-image"
+                src="images/closingstamp.png"
+                alt="Closing ceremony stamp QR code"
+              >
             </div>
           </div>
         </article>
@@ -2449,7 +2500,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-stat-grid" id="slide-4" data-bg="bg1" data-slide-id="4">
+      <section class="slide layout-stat-grid" id="slide-5" data-bg="bg1" data-slide-id="5">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2463,19 +2514,25 @@ const IMG_CLOSING = "images/closing.svg";
   
         <div class="panel-grid">
           <div class="panel-card revealable">
-            <div class="panel-photo">J</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="images/joanne.jpeg" alt="Joanne">
+            </div>
             <div class="panel-name">Joanne</div>
             <div class="panel-role">she/her</div>
             <div class="panel-fact">SWE @ Apple</div>
           </div>
           <div class="panel-card revealable">
-            <div class="panel-photo">2</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="images/amyjo.jpeg" alt="Amy Jo">
+            </div>
             <div class="panel-name">Amy Jo</div>
             <div class="panel-role">she/her</div>
             <div class="panel-fact">SWE @ Wealthsimple</div>
           </div>
           <div class="panel-card revealable">
-            <div class="panel-photo">3</div>
+            <div class="panel-photo">
+              <img class="panel-photo__image" src="images/anemmeabasi.jpeg" alt="Anemmeabasi">
+            </div>
             <div class="panel-name">Anemmeabasi</div>
             <div class="panel-role">she/her</div>
             <div class="panel-fact">SWE @ Microsoft</div>
@@ -2486,7 +2543,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-centered-single" id="slide-5" data-bg="bg2" data-slide-id="5">
+      <section class="slide layout-centered-single" id="slide-6" data-bg="bg2" data-slide-id="6">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2510,7 +2567,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-6" data-bg="bg3" data-slide-id="6">
+      <section class="slide layout-callout" id="slide-7" data-bg="bg3" data-slide-id="7">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2528,7 +2585,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-finalist-demo" id="slide-7" data-bg="bg1" data-slide-id="7">
+      <section class="slide layout-finalist-demo" id="slide-8" data-bg="bg1" data-slide-id="8">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2549,7 +2606,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-finalist-demo" id="slide-8" data-bg="bg2" data-slide-id="8">
+      <section class="slide layout-finalist-demo" id="slide-9" data-bg="bg2" data-slide-id="9">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2570,7 +2627,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-finalist-demo" id="slide-9" data-bg="bg3" data-slide-id="9">
+      <section class="slide layout-finalist-demo" id="slide-10" data-bg="bg3" data-slide-id="10">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2591,7 +2648,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-centered-single" id="slide-10" data-bg="bg1" data-slide-id="10">
+      <section class="slide layout-centered-single" id="slide-11" data-bg="bg1" data-slide-id="11">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor">
@@ -2626,7 +2683,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-11" data-bg="bg2" data-slide-id="11">
+      <section class="slide layout-callout" id="slide-12" data-bg="bg2" data-slide-id="12">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2645,7 +2702,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-12" data-bg="bg3" data-slide-id="12">
+      <section class="slide layout-winner-reveal" id="slide-13" data-bg="bg3" data-slide-id="13">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2653,13 +2710,16 @@ const IMG_CLOSING = "images/closing.svg";
     <div class="winner-reveal-shell revealable winner-reveal-shell--soft raffle-prize-shell">
       <div class="winner-reveal__eyebrow">Raffle Prize</div>
       <h1 class="winner-reveal__title ">2 Xbox Controllers</h1>
+      
+      
+      
     </div>
     
   </div>
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-13" data-bg="bg1" data-slide-id="13">
+      <section class="slide layout-winner-reveal" id="slide-14" data-bg="bg1" data-slide-id="14">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2676,7 +2736,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-14" data-bg="bg2" data-slide-id="14">
+      <section class="slide layout-winner-reveal" id="slide-15" data-bg="bg2" data-slide-id="15">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2693,7 +2753,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-15" data-bg="bg3" data-slide-id="15">
+      <section class="slide layout-winner-reveal" id="slide-16" data-bg="bg3" data-slide-id="16">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2701,14 +2761,16 @@ const IMG_CLOSING = "images/closing.svg";
     <div class="winner-reveal-shell revealable winner-reveal-shell--soft raffle-prize-shell">
       <div class="winner-reveal__eyebrow">Raffle Prize</div>
       <h1 class="winner-reveal__title ">1 Barry's 5-Class Pack</h1>
-
+      
+      
+      
     </div>
     
   </div>
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-16" data-bg="bg1" data-slide-id="16">
+      <section class="slide layout-winner-reveal" id="slide-17" data-bg="bg1" data-slide-id="17">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2725,7 +2787,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-17" data-bg="bg2" data-slide-id="17">
+      <section class="slide layout-winner-reveal" id="slide-18" data-bg="bg2" data-slide-id="18">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2742,7 +2804,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-18" data-bg="bg3" data-slide-id="18">
+      <section class="slide layout-winner-reveal" id="slide-19" data-bg="bg3" data-slide-id="19">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2759,7 +2821,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-19" data-bg="bg1" data-slide-id="19">
+      <section class="slide layout-callout" id="slide-20" data-bg="bg1" data-slide-id="20">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2777,7 +2839,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-20" data-bg="bg2" data-slide-id="20">
+      <section class="slide layout-split-right" id="slide-21" data-bg="bg2" data-slide-id="21">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2798,7 +2860,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-21" data-bg="bg3" data-slide-id="21">
+      <section class="slide layout-winner-reveal" id="slide-22" data-bg="bg3" data-slide-id="22">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2815,7 +2877,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-list-card" id="slide-22" data-bg="bg1" data-slide-id="22">
+      <section class="slide layout-list-card" id="slide-23" data-bg="bg1" data-slide-id="23">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2847,7 +2909,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-23" data-bg="bg2" data-slide-id="23">
+      <section class="slide layout-split-right" id="slide-24" data-bg="bg2" data-slide-id="24">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2868,7 +2930,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-24" data-bg="bg3" data-slide-id="24">
+      <section class="slide layout-winner-reveal" id="slide-25" data-bg="bg3" data-slide-id="25">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2885,7 +2947,253 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-25" data-bg="bg1" data-slide-id="25">
+      <section class="slide layout-callout" id="slide-26" data-bg="bg1" data-slide-id="26">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+      <div class="callout-layout">
+        <div class="callout-emoji revealable">🧠</div>
+        <article class="glass-card revealable glass-card--content callout-card">
+          <span class="pill pill--gradient-dusk">MLH Awards During Deliberation</span>
+          <h2 class="callout-title">MLH Awards Are Up Next.</h2>
+          <p class="body-copy body-copy--center">While the judges finish deliberating, we are recognizing standout hacks across the official MLH prize tracks.</p>
+          <p class="body-copy body-copy--center">The MLH ElevenLabs award is separate from the ElevenLabs sponsor prize later in the ceremony.</p>
+        </article>
+      </div>
+    </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-27" data-bg="bg2" data-slide-id="27">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--gradient-rabbit">🤖 MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best Hack Built with Google Antigravity</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>Google Swag Kits</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Build with Google Antigravity's agent-first editor and student access to Google AI Pro.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-28" data-bg="bg1" data-slide-id="28">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">Google Antigravity Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-29" data-bg="bg2" data-slide-id="29">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--gradient-bloom">✨ MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best Use of Gemini API</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>Google Swag Kits</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Build with Gemini for chat, summarization, creative generation, code, and more.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-30" data-bg="bg3" data-slide-id="30">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">Gemini API Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-31" data-bg="bg1" data-slide-id="31">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--gradient-dusk">🎙️ MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best Use of ElevenLabs</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>Wireless Earbuds</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Build natural, expressive voice experiences with ElevenLabs.</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Separate from the ElevenLabs sponsor prize.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-32" data-bg="bg2" data-slide-id="32">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">MLH ElevenLabs Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-33" data-bg="bg3" data-slide-id="33">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--gradient-gold">⚡ MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best Use of Solana</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>Ledger Nano S Plus</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Build fast, scalable apps with near-zero transaction costs on Solana.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-34" data-bg="bg1" data-slide-id="34">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">Solana Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-35" data-bg="bg2" data-slide-id="35">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--mint">🗄️ MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best Use of MongoDB Atlas</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>M5Stack IoT Kit</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Use MongoDB Atlas to power your cloud data layer and manage your hack data.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-36" data-bg="bg3" data-slide-id="36">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">MongoDB Atlas Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-split-right" id="slide-37" data-bg="bg1" data-slide-id="37">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="single-shell single-shell--wide sponsor-center-shell">
+      <article class="glass-card revealable glass-card--content single-card closing-prize-card">
+        <div class="single-header single-header--center">
+          <span class="pill pill--coral">🌐 MLH Prize</span>
+          <h2 class="slide-headline">[MLH] Best .Tech Domain Name</h2>
+        </div>
+        <div class="feature-stack">
+          <div class="feature-panel revealable prize-panel prize-panel--center"><span>Desktop Microphone + Free .Tech Domain</span></div><div class="feature-panel revealable prize-panel prize-panel--center"><span>Win a free .Tech domain name for up to 10 years to keep building after demo day.</span></div>
+        </div>
+        <div class="prize-strip revealable">And the winner is...</div>
+      </article>
+    </div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-winner-reveal" id="slide-38" data-bg="bg2" data-slide-id="38">
+        <div class="slide-bg"></div>
+        <div class="slide-wash"></div>
+        <div class="slide-decor"></div>
+        <div class="slide-content">
+    <div class="winner-reveal-shell revealable ">
+      <div class="winner-reveal__eyebrow">MLH Prize</div>
+      <h1 class="winner-reveal__title ">.Tech Domain Winner</h1>
+      <div class="winner-reveal__team">[ Project Name ]</div>
+      
+      <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
+    </div>
+    <div class="confetti-container" aria-hidden="true"></div>
+  </div>
+      </section>
+    
+
+      <section class="slide layout-callout" id="slide-39" data-bg="bg3" data-slide-id="39">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2903,7 +3211,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-26" data-bg="bg2" data-slide-id="26">
+      <section class="slide layout-split-right" id="slide-40" data-bg="bg1" data-slide-id="40">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2924,7 +3232,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-27" data-bg="bg3" data-slide-id="27">
+      <section class="slide layout-winner-reveal" id="slide-41" data-bg="bg2" data-slide-id="41">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2941,7 +3249,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-28" data-bg="bg1" data-slide-id="28">
+      <section class="slide layout-split-right" id="slide-42" data-bg="bg3" data-slide-id="42">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2962,7 +3270,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-29" data-bg="bg2" data-slide-id="29">
+      <section class="slide layout-winner-reveal" id="slide-43" data-bg="bg1" data-slide-id="43">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -2979,7 +3287,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-30" data-bg="bg3" data-slide-id="30">
+      <section class="slide layout-split-right" id="slide-44" data-bg="bg2" data-slide-id="44">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3000,7 +3308,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-31" data-bg="bg1" data-slide-id="31">
+      <section class="slide layout-winner-reveal" id="slide-45" data-bg="bg3" data-slide-id="45">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3008,7 +3316,7 @@ const IMG_CLOSING = "images/closing.svg";
     <div class="winner-reveal-shell revealable ">
       <div class="winner-reveal__eyebrow">Sponsor Prize</div>
       <h1 class="winner-reveal__title ">Lovable Winner</h1>
-      <div class="winner-reveal__team">[ Project Name ]</div>
+      <div class="winner-reveal__team">Icarus</div>
       
       <div class="winner-reveal__body">Please stay seated. Prize pickup and photos happen at the end.</div>
     </div>
@@ -3017,7 +3325,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-right" id="slide-32" data-bg="bg2" data-slide-id="32">
+      <section class="slide layout-split-right" id="slide-46" data-bg="bg1" data-slide-id="46">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3038,7 +3346,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-33" data-bg="bg3" data-slide-id="33">
+      <section class="slide layout-winner-reveal" id="slide-47" data-bg="bg2" data-slide-id="47">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3055,7 +3363,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-34" data-bg="bg1" data-slide-id="34">
+      <section class="slide layout-winner-reveal" id="slide-48" data-bg="bg3" data-slide-id="48">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3069,7 +3377,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-35" data-bg="bg2" data-slide-id="35">
+      <section class="slide layout-winner-reveal" id="slide-49" data-bg="bg1" data-slide-id="49">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3086,7 +3394,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-36" data-bg="bg3" data-slide-id="36">
+      <section class="slide layout-winner-reveal" id="slide-50" data-bg="bg2" data-slide-id="50">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3103,7 +3411,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-winner-reveal" id="slide-37" data-bg="bg1" data-slide-id="37">
+      <section class="slide layout-winner-reveal" id="slide-51" data-bg="bg3" data-slide-id="51">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3120,7 +3428,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-split-left" id="slide-38" data-bg="bg2" data-slide-id="38">
+      <section class="slide layout-split-left" id="slide-52" data-bg="bg1" data-slide-id="52">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor">
@@ -3149,7 +3457,6 @@ const IMG_CLOSING = "images/closing.svg";
             <div class="feature-stack">
               <div class="feature-row revealable"><span class="feature-icon">🏆</span><span>Raffle winners, side-award winners, sponsor-award winners, and the Top 3 should stay after the ceremony.</span></div>
               <div class="feature-row revealable"><span class="feature-icon">📸</span><span>Photos will also happen at the end!</span></div>
-              <!-- <div class="feature-row revealable"><span class="feature-icon">🎤</span><span>Please stay in place until an organizer calls your section forward.</span></div> -->
             </div>
           </article>
         </div>
@@ -3166,7 +3473,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-three-col" id="slide-39" data-bg="bg3" data-slide-id="39">
+      <section class="slide layout-three-col" id="slide-53" data-bg="bg2" data-slide-id="53">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3200,7 +3507,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-40" data-bg="bg1" data-slide-id="40">
+      <section class="slide layout-callout" id="slide-54" data-bg="bg3" data-slide-id="54">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3218,7 +3525,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-list-card" id="slide-41" data-bg="bg2" data-slide-id="41">
+      <section class="slide layout-list-card" id="slide-55" data-bg="bg1" data-slide-id="55">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3227,7 +3534,7 @@ const IMG_CLOSING = "images/closing.svg";
         <article class="glass-card revealable glass-card--content single-card">
           
     <div class="section-intro section-intro--center">
-      <!-- <div class="section-kicker">Add Logos to sponsor-logos/name.png</div> -->
+      
       <h2 class="section-title">Sponsor Tiers</h2>
     </div>
   
@@ -3527,7 +3834,7 @@ const IMG_CLOSING = "images/closing.svg";
       </section>
     
 
-      <section class="slide layout-callout" id="slide-42" data-bg="bg3" data-slide-id="42">
+      <section class="slide layout-callout" id="slide-56" data-bg="bg2" data-slide-id="56">
         <div class="slide-bg"></div>
         <div class="slide-wash"></div>
         <div class="slide-decor"></div>
@@ -3556,8 +3863,8 @@ const IMG_CLOSING = "images/closing.svg";
   </div>
 
   <script>
-    const speakerNotes = ["Before starting, test all mics. Judges should be in the front row, sponsors in the second row. Be fully ready to begin at 4:00 PM.","Welcome everyone back and let the room settle. Keep the tone warm, brief, and confident.","Pause long enough for attendees to grab the Closing Ceremony stamp before moving on.","Introduce Joanne plus the two remaining judges from the non-hacker check-in sheet. Confirm names, titles, and pronunciation before ceremony.","Explain the format cleanly: each finalist gets 5 minutes for the panel presentation, then a short transition into 2 minutes of Q&A.","Build energy for the finalist block and remind the room to support all three teams.","Introduce Finalist #1 by team and project name, then step aside.","Repeat for Finalist #2.","Repeat for Finalist #3. When they finish, clearly tell the audience the judges are now deliberating.","Use this as the handoff: while judges deliberate, the ceremony continues with the raffle and side awards.","Emphasize that the raffle is happening during deliberation and that all winners stay seated until end-of-ceremony pickup.","Announce the Xbox controller winners live. No names on screen so you have flexibility.","Announce the Govee TV Backlight Strip winners live.","Announce the JBL Go Speaker winners live.","Announce the Barry's 5-class pack winner live.","Announce the Spin Society winner live and note that this prize is digital Through cmd-f email.","Announce the Koerner's Pub giftcard winners live and note that this prize is digital Through cmd-f email.","Announce the Progression Bouldering pass winners live and note that this is digital Through cmd-f email after the feedback-form check.","Keep momentum high. This is the pivot from raffle into the side-award section while judging continues.","Set up the Best Design award and fill in any final details from the 3:50 PM update.","Announce Best Design and keep the winners seated for later photos.","List all 8 UBC CS Project Hub shortlisted teams. Make clear they will be contacted after the fact.","Set up the nwChoice award and confirm the correct project and presenter.","Announce the nwChoice winner and keep them seated.","Now pivot from side awards into sponsor awards.","Invite the 1Password representative if needed, then announce the category.","Announce the 1Password winner. Ask them to stay seated; prizes and photos happen at the end.","Invite the ElevenLabs representative if needed.","Announce the ElevenLabs winner and keep them seated.","Invite the Lovable representative if needed.","Announce the Lovable winner and keep them seated.","Invite the PCCA representative if needed.","Announce the PCCA winner and keep them seated.","Tell the room we are now down to the Top 3. Announce placements in order: Third, Second, then First.","Reveal Third Place, let the room react, and keep the team seated.","Reveal Second Place, let the room react, and keep the team seated.","This is the big finish. Hype First Place even though the room now knows what is coming.","Call all winners, side-award recipients, sponsor-award recipients, and raffle winners to stay after ceremony for prize pickup and photos. Do not ask anyone to come up during announcements.","Thank hackers, mentors, volunteers, and organizers with real warmth.","Give a general thank-you to sponsors before the tier slide.","Use this slide to shout out each sponsor tier and call out the logo wall.","Close warmly and send people into pickup, photos, and goodbyes."];
-    const slideTitles = ["Closing Title","Welcome Back","Closing Ceremony Stamp","Meet the Judges","How Closing Judging Works","Finalist Demos","Finalist #1 Demo","Finalist #2 Demo","Finalist #3 Demo","Judges Deliberating","Raffle During Deliberation","2 Xbox Controllers","2 Govee TV Backlight Strips","2 JBL Go Speakers","1 Barry's 5-Class Pack","1 Spin Society Online Prize","2 Koerner's Pub Giftcards","4 Progression Bouldering Passes","Side Awards Intro","Best Design Award","Best Design Winner","UBC CS Project Hub Shortlist","nwChoice Award","nwChoice Winner","Sponsor Prize Transition","1Password Prize","1Password Winner","ElevenLabs Prize","ElevenLabs Winner","Lovable Prize","Lovable Winner","PCCA Prize","PCCA Winner","Top Three","Third Place","Second Place","First Place","Quick Prize Reminder","Thank You","Sponsor Shoutout","Sponsor Tiers","Goodbye"];
+    const speakerNotes = ["Before starting, test all mics. Judges should be in the front row, sponsors in the second row. Be fully ready to begin at 4:00 PM.","Welcome everyone back and let the room settle. Keep the tone warm, brief, and confident.","Pause long enough for attendees to grab the Closing Ceremony stamp before moving on.","Read the land acknowledgement clearly before moving into judge introductions.","Introduce Joanne plus the two remaining judges from the non-hacker check-in sheet. Confirm names, titles, and pronunciation before ceremony.","Explain the format cleanly: each finalist gets 5 minutes for the panel presentation, then a short transition into 2 minutes of Q&A.","Build energy for the finalist block and remind the room to support all three teams.","Introduce Finalist #1 by team and project name, then step aside.","Repeat for Finalist #2.","Repeat for Finalist #3. When they finish, clearly tell the audience the judges are now deliberating.","Use this as the handoff: while judges deliberate, the ceremony continues with the raffle and side awards.","Emphasize that the raffle is happening during deliberation and that all winners stay seated until end-of-ceremony pickup.","Announce the Xbox controller winners live. No names on screen so you have flexibility.","Announce the Govee TV Backlight Strip winners live.","Announce the JBL Go Speaker winners live.","Announce the Barry's 5-class pack winner live.","Announce the Spin Society winner live and note that this prize is digital Through cmd-f email.","Announce the Koerner's Pub giftcard winners live and note that this prize is digital Through cmd-f email.","Announce the Progression Bouldering pass winners live and note that this is digital Through cmd-f email after the feedback-form check.","Keep momentum high. This is the pivot from raffle into the side-award section while judging continues.","Set up the Best Design award and fill in any final details from the 3:50 PM update.","Announce Best Design and keep the winners seated for later photos.","List all 8 UBC CS Project Hub shortlisted teams. Make clear they will be contacted after the fact.","Set up the nwChoice award and confirm the correct project and presenter.","Announce the nwChoice winner and keep them seated.","Set up the MLH prize block and make clear these categories are separate from the sponsor awards that follow, especially ElevenLabs.","Introduce [MLH] Best Hack Built with Google Antigravity and summarize the prize before the reveal.","Announce the Google Antigravity winner and keep them seated.","Introduce [MLH] Best Use of Gemini API.","Announce the Gemini API winner and keep them seated.","Introduce [MLH] Best Use of ElevenLabs and note that it is not the same as the ElevenLabs sponsor prize later.","Announce the MLH ElevenLabs winner and keep them seated.","Introduce [MLH] Best Use of Solana.","Announce the Solana winner and keep them seated.","Introduce [MLH] Best Use of MongoDB Atlas.","Announce the MongoDB Atlas winner and keep them seated.","Introduce [MLH] Best .Tech Domain Name.","Announce the .Tech Domain winner and keep them seated.","Now pivot from MLH awards into sponsor awards.","Invite the 1Password representative if needed, then announce the category.","Announce the 1Password winner. Ask them to stay seated; prizes and photos happen at the end.","Invite the ElevenLabs representative if needed.","Announce the ElevenLabs winner and keep them seated.","Invite the Lovable representative if needed.","Announce the Lovable winner and keep them seated.","Invite the PCCA representative if needed.","Announce the PCCA winner and keep them seated.","Tell the room we are now down to the Top 3. Announce placements in order: Third, Second, then First.","Reveal Third Place, let the room react, and keep the team seated.","Reveal Second Place, let the room react, and keep the team seated.","This is the big finish. Hype First Place even though the room now knows what is coming.","Call all winners, side-award recipients, sponsor-award recipients, and raffle winners to stay after ceremony for prize pickup and photos. Do not ask anyone to come up during announcements.","Thank hackers, mentors, volunteers, and organizers with real warmth.","Give a general thank-you to sponsors before the tier slide.","Use this slide to shout out each sponsor tier and call out the logo wall.","Close warmly and send people into pickup, photos, and goodbyes."];
+    const slideTitles = ["Closing Title","Welcome Back","Closing Ceremony Stamp","Land Acknowledgement","Meet the Judges","How Closing Judging Works","Finalist Demos","Finalist #1 Demo","Finalist #2 Demo","Finalist #3 Demo","Judges Deliberating","Raffle During Deliberation","2 Xbox Controllers","2 Govee TV Backlight Strips","2 JBL Go Speakers","1 Barry's 5-Class Pack","1 Spin Society Online Prize","2 Koerner's Pub Giftcards","4 Progression Bouldering Passes","Side Awards Intro","Best Design Award","Best Design Winner","UBC CS Project Hub Shortlist","nwChoice Award","nwChoice Winner","MLH Awards Intro","Google Antigravity Award","Google Antigravity Winner","Gemini API Award","Gemini API Winner","MLH ElevenLabs Award","MLH ElevenLabs Winner","Solana Award","Solana Winner","MongoDB Atlas Award","MongoDB Atlas Winner",".Tech Domain Award",".Tech Domain Winner","Sponsor Prize Transition","1Password Prize","1Password Winner","ElevenLabs Prize","ElevenLabs Winner","Lovable Prize","Lovable Winner","PCCA Prize","PCCA Winner","Top Three","Third Place","Second Place","First Place","Quick Prize Reminder","Thank You","Sponsor Shoutout","Sponsor Tiers","Goodbye"];
 
     const CLOSING_BG = typeof IMG_CLOSING !== 'undefined' ? IMG_CLOSING : IMG_BG1;
     const bgMap = {
@@ -3567,7 +3874,7 @@ const IMG_CLOSING = "images/closing.svg";
       closing: CLOSING_BG,
     };
 
-    const winnerSlides = new Set([21, 24, 27, 29, 31, 33, 35, 36, 37]);
+    const winnerSlides = new Set([22, 25, 28, 30, 32, 34, 36, 38, 41, 43, 45, 47, 49, 50, 51]);
     const slideEls = Array.from(document.querySelectorAll('.slide'));
     const dotsContainer = document.getElementById('nav-dots');
     const sectionNavButtons = document.getElementById('section-nav-buttons');
