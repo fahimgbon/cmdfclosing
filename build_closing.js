@@ -2,7 +2,24 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const bgAssets = fs.readFileSync(path.join(ROOT, 'bg_assets.js'), 'utf8').trim();
+
+function assetReference(...segments) {
+  const relativePath = path.join(...segments);
+  const assetPath = path.join(ROOT, relativePath);
+  if (!fs.existsSync(assetPath)) {
+    throw new Error(`Missing background asset: ${relativePath}`);
+  }
+  return relativePath.split(path.sep).join('/');
+}
+
+const bgAssets = [
+  ['IMG_BG1', assetReference('images', 'BG1.svg')],
+  ['IMG_BG2', assetReference('images', 'BG2.svg')],
+  ['IMG_BG3', assetReference('images', 'BG3.svg')],
+  ['IMG_CLOSING', assetReference('images', 'closing.svg')],
+]
+  .map(([name, value]) => `const ${name} = ${JSON.stringify(value)};`)
+  .join('\n');
 
 function extractOpeningCss() {
   const openingPath = path.join(ROOT, 'cmdf2026_opening.html');
