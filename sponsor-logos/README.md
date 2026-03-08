@@ -1,0 +1,24 @@
+Add sponsor logo files to this folder using these exact filenames:
+
+- `1password.png`
+- `centre-for-digital-media.png`
+- `bcit-sa.png`
+- `ubc-sac.png`
+- `github.png`
+- `cse.png`
+- `smart-cohort.png`
+- `paraform.png`
+- `toolhouse-ai.png`
+- `microsoft.png`
+- `elevenlabs.png`
+- `lovable.png`
+- `pcca.png`
+- `steves-poke-bar.png`
+- `koerners-pub.png`
+- `barrys-vancouver.png`
+- `spin-society.png`
+- `reviva-lounge.png`
+- `bon-macaron.png`
+- `limegee.png`
+- `ideamatch.png`
+- `minuteman-press.png`

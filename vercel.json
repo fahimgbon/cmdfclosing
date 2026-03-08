@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/cmdf2026_closing.html"
+    }
+  ]
+}
